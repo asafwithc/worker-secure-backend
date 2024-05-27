@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 exports.authJWT = (user) => {
+    console.log(process.env.ACCESS_TOKEN_SECRET)
   const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN});
   return accessToken;
 };

@@ -8,7 +8,6 @@ exports.getNotifications = async (req, res) => {
 
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const email = decoded.user.email;
-    console.log(decoded);
 
     const page = parseInt(req.query.page, 10) || 1; // Page number, default is 1
     const pageSize = parseInt(req.query.pageSize, 10) || 10; // Number of items per page, default is 10

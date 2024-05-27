@@ -19,9 +19,6 @@ const userSchema = Schema(
       required: [true, "Please enter your email."],
       unique: true
     },
-    notifications: [{
-      type: String
-    }],
     connectionURI: {
       type: String
     }
