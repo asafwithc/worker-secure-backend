@@ -5,15 +5,15 @@ exports.getNotifications = async (req, res) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    const email = decoded.user.email;
-    console.log("Decoded email:", email);
-
-    const page = parseInt(req.query.page, 10) || 1;
-    const pageSize = parseInt(req.query.pageSize, 10) || 10;
-
     try {
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        const email = decoded.user.email; // Burada user nesnesinden email bilgisine erişiyoruz
+        console.log("Decoded email:", email);
+
+        const page = parseInt(req.query.page, 10) || 1;
+        const pageSize = parseInt(req.query.pageSize, 10) || 10;
         const skip = (page - 1) * pageSize;
+
         const notifications = await Notification.find({ email: email })
                                                 .skip(skip)
                                                 .limit(pageSize)

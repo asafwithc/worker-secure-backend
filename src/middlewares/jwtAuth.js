@@ -17,3 +17,10 @@ exports.authorize = (req, res, next) => {
         return res.status(403).send({ message: "Failed to authenticate token" });
     }
 };
+
+exports.authJWT = (user) => {
+  const payload = { user: { email: user.email } }; // email'i user nesnesine ekliyoruz
+  const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+  return token;
+};
+
